@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+
+  pre_tasks:
+    - apt:
+        update_cache: true
+        cache_valid_time: 86400 # one day
+
+  tasks:
+    
+    - import_tasks: tasks/apps.yml
+

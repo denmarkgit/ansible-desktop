@@ -1,0 +1,22 @@
+---
+- name: Download Chrome
+  become: false
+  get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest: $HOME
+
+- name: saved currnet user
+  become: false
+  shell: whoami
+  register: current_user
+  changed_when: false
+
+- name: Install Chrome
+  apt:
+    deb: "/home/{{ current_user.stdout }}/google-chrome-stable_current_amd64.deb"
+
+- name: install apps
+  apt:
+    pkg:
+      - remmina
+      - default-jre
